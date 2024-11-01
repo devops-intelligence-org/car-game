@@ -1,29 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import taxiImage from './assets/taxi.png';  // Asegúrate de poner la ruta correcta
+import React, { useState, useEffect, useRef } from 'react';
+import taxiImage from './assets/car.png';  // Asegúrate de poner la ruta correcta
+import helicopter from './assets/helicopter.png';
 import './App.css';
 
 const CarGame = () => {
-  const [position, setPosition] = useState(10);  // Posición del carrito
+  const [carPosition, setCarPosition] = useState(10);  // Posición del carrito
   const [isMoving, setIsMoving] = useState(15);  // Estado del movimiento
+  const [obstaclePosition, setObstaclePosition] = useState(0); // Posición vertical del obstáculo
+  const intervalRef = useRef(null); // Referencia para el intervalo del obstáculo
 
+  
   // Función que mueve el carrito
   const handleTap = () => {
     setIsMoving(true);
-    setPosition((prev) => prev + 10);  // Aumenta la posición
+    setCarPosition((prev) => prev + 20);  // Aumenta la posición
   };
 
   // Detiene el movimiento después de un tiempo
-  useEffect(() => {
+  useEffect(() => 
+  {
     if (isMoving) {
       const timer = setTimeout(() => {
         setIsMoving(false);
       }, 500);  // Detiene el movimiento después de 500ms
       return () => clearTimeout(timer);
     }
-  }, [isMoving]);
+
+    intervalRef.current = setInterval(() => {
+      setObstaclePosition((prevPosition) => {
+        // Si el obstáculo llega al límite superior, reinicia su posición
+        if (prevPosition >= window.innerHeight - 50) {
+          return 0;
+        }
+        return prevPosition + 15; // Incremento en la posición para mover hacia arriba
+      });
+    }, 100); // Intervalo de movimiento
+
+    // Limpieza del intervalo al desmontar el componente
+    return () => clearInterval(intervalRef.current);
+
+  },
+[isMoving]  
+ 
+
+);
 
   const handleRestart = () => {
-    setPosition(0);  // Restablecer la posición a 0
+    setCarPosition(0);  // Restablecer la posición a 0
   };
 
   return (
@@ -32,11 +55,17 @@ const CarGame = () => {
       <button onClick={handleRestart} className="restart-button">Restart</button>
       <div className="track">
       <img 
+          src={helicopter} 
+          className="obstacle" style={{ bottom: `${obstaclePosition}px`, left: '10%' }}
+        />         
+      <img 
           src={taxiImage} 
           alt="Taxi clásico de NY" 
           className="car" 
-          style={{ left: `${position}px` }} 
-        />      
+          style={{ bottom: `${carPosition}px` }} 
+        />  
+        <div  />
+   
       </div>
       
     </div>

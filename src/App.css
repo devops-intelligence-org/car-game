@@ -13,6 +13,7 @@
   }
 }
 
+.nickname-screen,
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -75,7 +76,7 @@
   bottom: 10px; /* Inicia desde la parte inferior de la pista */
   left: 50%; /* Centrado horizontalmente */
   transform: translateX(-50%);
-  width: 15%;
+  width: 5%;
   height: auto;
   transition: bottom 0.5s; /* Cambia la propiedad de movimiento a 'bottom' */
   z-index: 1;
@@ -92,7 +93,79 @@
 
 .instructions {
   position: absolute;
-  top: 10px;  /* Ubicado en la parte superior */
+  bottom: 20px;  /* Ubicado en la parte inferior */
+  right: 0%;
+  color: white;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+.restart-button {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  background-color: #ffcc00;
+  color: navy;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 4vw; /* Tamaño de fuente responsivo para el botón */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.restart-button:hover {
+  background-color: #ff9900;
+}
+
+.team-selection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+  color: white;
+}
+
+.nickname-buttom,
+.team-button {
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.team-a {
+  background-color: #007bff;
+  color: white;
+}
+
+.team-b {
+  background-color: #ff5722;
+  color: white;
+}
+
+.team-display {
+  position: absolute;
+  top: 170px;
+  left: 10px;
+  color: white;
+  font-size: 14px;
+
+  font-family: Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.linea-meta {
+  position: absolute;
+  top: 0px;  /* Ubicado en la parte inferior */
   left: 50%;
   transform: translateX(-50%);
   color: white;
@@ -102,22 +175,60 @@
   padding: 10px;
   border-radius: 5px;
 }
-.restart-button {
+.tap-counter, .time-display, .avg-display{
   position: absolute;
-  top: 40px;
+  top: 200px;
   left: 10px;
-  background-color: #ffcc00;
-  color: #444;
-  padding: 10px 20px;
-  border: none;
+  color: white;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 2vw; /* Tamaño de fuente responsivo para el botón */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
 }
 
-.restart-button:hover {
-  background-color: #ff9900;
+.time-display {
+  top: 240px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+.avg-display {
+  top: 280px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.game-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 @keyframes moveCity {

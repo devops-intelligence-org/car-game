@@ -57,9 +57,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_88761856960A4D0E89187D545F492AB5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B2E3D407B2A04567AA505A77B3B88173 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_91DECD3370E448F8A764E9A4BE0855DF }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_405B02A605754D629AD390A79FCC5CDA }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E11C5CDBE0A84AA0B4D87A3582F45215 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_57418A932D2142E1A48817108B0C669C }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -67,5 +67,5 @@ jobs:
         with:
           app-name: 'car-game'
           slot-name: 'Production'
-          package: './build'
+          package: .
           

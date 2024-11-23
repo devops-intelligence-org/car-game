@@ -1,43 +1,20 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, screen, fireEvent } from '@testing-library/react';
 import CarGame from './App';
 
-describe('Car movement with tap', () => {
-  test('should start at position 0', () => {
-    const { getByText, container } = render(<CarGame />);
-    
-    const car = container.querySelector('.car');
-    // Verificar que la posición inicial sea 0
-    expect(car).toHaveStyle('left: 0px');
-  });
+test("Permite avanzar al seleccionar un nickname válido", () => {
+  render(<CarGame />);
 
-  test('should move the car when clicked', () => {
-    const { container } = render(<CarGame />);
-    
-    const car = container.querySelector('.car');
-    const track = container.querySelector('.game-container');
+  // Buscar el input de nickname y el botón de continuar
+  const nicknameInput = screen.getByPlaceholderText("Ingresa tu nickname");
+  const continueButton = screen.getByText("Continuar");
 
-    // Simular un "tap" o clic en la pista
-    fireEvent.click(track);
+  // Simular ingreso de un nickname
+  fireEvent.change(nicknameInput, { target: { value: "Player123" } });
 
-    // Verificar que el carro se haya movido 20px a la derecha
-    expect(car).toHaveStyle('left: 10px');
-  });
+  // Hacer clic en el botón de continuar
+  fireEvent.click(continueButton);
 
-  test('should move the car multiple times when clicked multiple times', () => {
-    const { container } = render(<CarGame />);
-    
-    const car = container.querySelector('.car');
-    const track = container.querySelector('.game-container');
-
-    // Simular varios "taps" o clics en la pista
-    fireEvent.click(track);
-    fireEvent.click(track);
-    fireEvent.click(track);
-
-    // Verificar que el carro se haya movido 60px (3 clics * 20px)
-    expect(car).toHaveStyle('left: 30px');
-  });
+  // Verificar que se muestra la pantalla de selección de equipo
+  expect(screen.getByText(/Selecciona tu equipo:/i)).toBeInTheDocument();
+  expect(screen.getByText(/Hola, Player123/i)).toBeInTheDocument();
 });
-

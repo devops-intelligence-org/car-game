@@ -116,7 +116,7 @@ const CarGame = () => {
     }
   
     //PlayerID
-    const [playerId, setPlayerId] = useState(() => {
+    const [playerId] = useState(() => {
       const savedPlayerId = localStorage.getItem("playerId");
       if (savedPlayerId) return savedPlayerId;
     
